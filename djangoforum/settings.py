@@ -29,7 +29,12 @@ SECRET_KEY = 'django-insecure-qxy8$(xi@rykzjhqhhgelq_1zadho#u_=y978z6lcje#v6ba9c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+X_FRAME_OPTIONS = '*'
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = [
+    'http://0.0.0.0:3000'
+]
 
 
 # Application definition
@@ -42,10 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
-    'cloudinary'
+    'cloudinary',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,7 +140,7 @@ STATICFILES_DIRS = (
 )
 
 cloudinary.config(
-    api_proxy='http://proxy.server:3128',
+   
     cloud_name="dk0eytra3",
     api_key="324637351579532",
     api_secret="40qy2pPQbNlvSoymRIasDTrzkaQ"
